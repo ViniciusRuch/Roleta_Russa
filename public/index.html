@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roleta da Sorte</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main>
+    <div id="login">
+      <h1>ROULETA Russa</h1>
+      <p>Digite seu nome para jogar:</p>
+      <input type="text" id="username" placeholder="Seu nome..." />
+      <button onclick="enterGame()">Entrar</button>
+    </div>
+
+    <div id="rooms" class="hidden">
+      <h2>Salas Disponíveis</h2>
+      <ul id="roomList"></ul>
+      <button onclick="createRoom()">Criar Sala</button>
+    </div>
+
+    <div id="game" class="hidden">
+      <h2>Jogo - Sala <span id="roomId"></span></h2>
+      <p><strong>Jogadores:</strong> <span id="players"></span></p>
+      <div id="player-indicator">
+        <div id="status-light" class="light gray"></div>
+          <p id="status-message">Aguardando sua vez...</p>
+        </div>
+      <button onclick="reroll()">Rodar barril</button>
+      <button onclick="reveal()">Atirar</button>
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
