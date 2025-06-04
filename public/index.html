@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <h1>Teste</h1>
+  <input id="name" placeholder="Seu nome" />
+  <button onclick="join()">Entrar</button>
+  <div id="game"></div>
+  <div id="turno" style="margin-top:10px; font-weight:bold;"></div>
+  <div id="log" style="margin-top:20px; border-top:1px solid #ccc; padding-top:10px;">
+    <h3>Log de Ações</h3>
+  </div>
+  <button onclick="shoot()">Atirar</button>
+  <script src="/script.js"></script>
 </body>
+
 </html>
