@@ -1,11 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Roleta Russa</title>
+  <style>
+    body { font-family: Arial; margin: 20px; }
+    #game, #rooms { display: none; }
+    button { margin: 5px; padding: 10px; }
+  </style>
 </head>
 <body>
-    <h1>Teste</h1>
+  <div id="login">
+    <h2>Digite seu nome:</h2>
+    <input type="text" id="username" placeholder="Nome"/>
+    <button onclick="enterGame()">Entrar</button>
+  </div>
+
+  <div id="rooms">
+    <h2>Salas</h2>
+    <ul id="roomList"></ul>
+    <button onclick="createRoom()">Criar Sala</button>
+  </div>
+
+  <div id="game">
+    <h2>Jogo - Sala <span id="roomId"></span></h2>
+    <p>Jogadores: <span id="players"></span></p>
+    <p>Sua vez? <span id="yourTurn"></span></p>
+    <p>Resultado: <span id="result"></span></p>
+    <button onclick="reroll()">Rodar barril</button>
+    <button onclick="reveal()">Atirar</button>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
