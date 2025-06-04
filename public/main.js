@@ -6,6 +6,8 @@ let rerollUsed = false;
 
 socket.onmessage = (event) => {
   const data = JSON.parse(event.data);
+  console.log("Mensagem recebida do servidor:", data);
+
   switch (data.type) {
     case "rooms":
       updateRoomList(data.rooms);
@@ -67,10 +69,62 @@ function updateRoomList(rooms) {
 }
 
 function updateGame(data) {
-  document.getElementById("players").textContent =
-    data.players.map(p => `${p.name} (${p.status})`).join(", ");
-  document.getElementById("yourTurn").textContent =
-    data.turn === username ? "Sim" : "Não";
-  document.getElementById("result").textContent = data.result || "";
+  const playersStatus = data.players.map(p => {
+    return p.status === "dead" ? `${p.name} &#128565;` : p.name; // 😵 emoji
+  }).join(", ");
+
+  document.getElementById("players").innerHTML = playersStatus;
+
+  const currentPlayer = data.players.find(p => p.name === username);
+  const isDead = currentPlayer.status === "dead";
+  const isYourTurn = data.turn === username;
+
+  updatePlayerIndicator(isYourTurn, isDead);
+
+  if (data.result && currentPlayer && data.result.player === username) {
+    const isLucky = data.result.lucky;
+    showResultMessage(isLucky);
+
+    setTimeout(() => {
+      if (!isDead) {
+        updatePlayerIndicator(isYourTurn, isDead);
+      }
+    }, 1200);
+  }
+
   rerollUsed = data.rerollUsed;
 }
+
+function updatePlayerIndicator(isYourTurn, isDead) {
+  const light = document.getElementById("status-light");
+  const message = document.getElementById("status-message");
+
+  if (isDead) {
+    light.className = "light gray";
+    message.textContent = "Você morreu.";
+    return;
+  }
+
+  if (isYourTurn) {
+    light.className = "light green";
+    message.textContent = "É sua vez! Clique para jogar.";
+  } else {
+    light.className = "light red";
+    message.textContent = "Aguardando outros jogadores...";
+  }
+}
+
+function showResultMessage(isLucky) {
+  const light = document.getElementById("status-light");
+  const message = document.getElementById("status-message");
+
+  if (isLucky) {
+    light.className = "light green";
+    message.textContent = "Você deu sorte!";
+  } else {
+    light.className = "light gray";
+    message.textContent = "Você morreu.";
+  }
+}
+
+playe
